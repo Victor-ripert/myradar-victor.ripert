@@ -1,0 +1,1 @@
+python3 generator.py -p 10 -t 3 -d 20 -f -r 5 -S -o map/10_planes_3_towers.rdr
