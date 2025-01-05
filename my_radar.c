@@ -24,11 +24,18 @@ int my_radar(char **argv)
     sfEvent event;
     linked_list_t *list = malloc(sizeof(linked_list_t));
     sfClock *mov_clock = sfClock_create();
+    sfClock *delay_clock = sfClock_create();
     int clock_pause = 0;
+    disp_t disp_param;
 
     plane_list_t *avion = malloc(sizeof(plane_list_t));
     tower_list_t *tower = malloc(sizeof(tower_list_t));
-    config_parsing(argv[1], &avion, &tower); //84 if error (ex : !openfile)
+
+    disp_param.sprite = 1;
+    disp_param.hitbox = 1;
+    if (config_parsing(argv[1], &avion, &tower) == 84) {
+        return 84;
+    }
 
     window = sfRenderWindow_create(mode, "SFML window", sfResize | sfClose, NULL);
     if (!window)
@@ -38,9 +45,6 @@ int my_radar(char **argv)
         return EXIT_FAILURE;
 
     sprite = sfSprite_create();
-    /* Link the texture to the sprite */
-    //sfSprite_setTexture(sprite, texture, sfTrue);
-    /* Limit the window framerate */
     sfRenderWindow_setFramerateLimit(window, 30);
     /* Start the game loop */
     while (sfRenderWindow_isOpen(window))
@@ -54,20 +58,24 @@ int my_radar(char **argv)
             }
             if (event.type == sfEvtKeyReleased) {
                 clock_pause = pause(event, clock_pause);
+                plane_disp_param(event, &disp_param);
             }
         }
+        //Collision entre avions
+        collision_plane_list(&avion);
         // if (is_intersecting_circle(circle, circle_2) == 1) {
         //     sfCircleShape_setFillColor(circle, sfWhite);
         //     sfCircleShape_setFillColor(circle_2, sfWhite);
         // }
         /* Clear the screen */
+        enable_plane(&avion, delay_clock);
         if (clock_pause == 0) {
             movement(&avion, mov_clock);
         }
         printf("Clock pose = %d\n", clock_pause);
         sfRenderWindow_clear(window, sfBlack);
-        display_list_plane(avion, window);
-        display_list_tower(tower, window);
+        display_list_plane(avion, window, disp_param);
+        display_list_tower(tower, window, disp_param);
         /* Draw the sprite */
         display(window, sprite);
         // sfRenderWindow_drawCircleShape(window, circle, NULL);

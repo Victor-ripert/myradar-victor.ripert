@@ -8,13 +8,13 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-void display_list_tower(tower_list_t *begin, sfRenderWindow *window)
+void display_list_tower(tower_list_t *begin, sfRenderWindow *window, disp_t disp_param)
 {
     tower_list_t *temp;
 
     temp = begin;
     while (temp != NULL) {
-        display_node_tower(temp, window);
+        display_node_tower(temp, window, disp_param);
         temp = temp->next;
     }
     //printf("End of Plane's List.\n");

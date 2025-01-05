@@ -9,14 +9,14 @@
 #include <stdlib.h>
 #include <SFML/Graphics.h>
 
-void display_node_tower(tower_list_t *node, sfRenderWindow *window)
+void display_node_tower(tower_list_t *node, sfRenderWindow *window, disp_t disp_param)
 {
-    //printf("Tower Sprite :\n");
-    //printf("test\n");
     if (node != NULL) {
-        sfRenderWindow_drawSprite(window, node->sprite, NULL);
-        //printf("Tower Circle :\n");
-        sfRenderWindow_drawCircleShape(window, node->hitbox, NULL);
+        if (disp_param.sprite == 1) {
+            sfRenderWindow_drawSprite(window, node->sprite, NULL);
+        }
+        if (disp_param.hitbox == 1) {
+            sfRenderWindow_drawCircleShape(window, node->hitbox, NULL);
+        }
     }
-    //printf("After Tower circle !!\n");
 }

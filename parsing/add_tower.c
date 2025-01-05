@@ -24,7 +24,7 @@ int add_tower(char *config, tower_list_t **begin, sfTexture *texture)
     sfSprite_setTexture(tower, texture, sfTrue);
     sfSprite_setScale(tower, sprite_scale);
 
-    printf("Add Plane !!\n");
+    printf("Add Tower !!\n");
 
     config_array = my_str_to_word_array(config, ' ');
     temp->position.x = str_to_nbr(config_array[1]);

@@ -22,9 +22,8 @@ int config_parsing(char *pathname, plane_list_t **begin_plane, tower_list_t **be
 
     stream = fopen(pathname, "r");
     if (stream == NULL) {
-        printf("error fopen\n");
         perror("fopen");
-        return EXIT_FAILURE;
+        return 84;
     }
 
     //set texture for plane & tower :

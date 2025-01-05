@@ -11,7 +11,7 @@ int special_strlen(char *str)
     int i = 0;
     int retoure = 0;
 
-    while (str[i] != '\0' && str[i] != '.'){
+    while (str[i] != '\0' && str[i] != '.' && str[i] != '\n'){
         i++;
         retoure++;
     }
@@ -29,10 +29,11 @@ int str_to_nbr(char *nb)
     }
     for (; i != nb_len; i++) {
         result = result * 10;
-        result += nb[i] - '0';
+        result += (nb[i] - '0');
     }
     if (nb[0] == '-') {
         result *= -1;
+
     }
     return result;
 }

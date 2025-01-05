@@ -16,6 +16,7 @@ SRC =	main.c	\
 	parsing/add_tower.c	\
 	parsing/norm_vector.c	\
 	parsing/plane_angle.c	\
+	parsing/find_top_left.c	\
 	word_array/my_str_to_word_array.c	\
 	word_array/my_strlen.c	\
 	word_array/my_word_len.c	\
@@ -30,7 +31,13 @@ SRC =	main.c	\
 	linked_list/tower/push_to_list_tower.c	\
 	linked_list/tower/replace_ptr_tower.c	\
 	sprites/movement/movement.c	\
-	sprites/movement/pause.c
+	sprites/movement/pause.c	\
+	sprites/movement/enable_plane.c	\
+	sprites/plane_disp_param.c	\
+	sprites/collision/collision_plane_list.c	\
+	sprites/collision/find_4_faces.c	\
+	sprites/collision/collision_2_cube.c	\
+	sprites/collision/collision_2_faces.c
 
 NAME	=	my_radar
 

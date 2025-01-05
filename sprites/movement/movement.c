@@ -18,12 +18,17 @@ void movement(plane_list_t **begin, sfClock *clock)
 
     temp = (*begin);
     while (temp != NULL) {
-        if (elapsed_time.microseconds > 10000) {
+        if (elapsed_time.microseconds > 10000 && temp->enable == 1) {
             temp->pos.x += ((temp->normalized_vector.x * temp->speed) / 100);
             temp->pos.y += (temp->normalized_vector.y * temp->speed) / 100;
-            sfSprite_setPosition(temp->sprite, temp->pos);
-            sfRectangleShape_setPosition(temp->hitbox, temp->pos);
+            temp->top_left_pos.x += ((temp->normalized_vector.x * temp->speed) / 100);
+            temp->top_left_pos.y += (temp->normalized_vector.y * temp->speed) / 100;
+            sfSprite_setPosition(temp->sprite, temp->top_left_pos);
+            sfRectangleShape_setPosition(temp->hitbox, temp->top_left_pos);
             sfClock_restart(clock);
+        }
+        if (temp->pos.x < temp->arrival.x + 2 && temp->pos.y < temp->arrival.y + 2 && temp->pos.x > temp->arrival.x - 2 && temp->pos.y > temp->arrival.y - 2) {
+            temp->enable = 2;
         }
         //printf("node !\n");
         temp = temp->next;

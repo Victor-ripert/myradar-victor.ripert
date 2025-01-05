@@ -10,6 +10,26 @@
 #ifndef FILE_H
     #define FILE_H
 
+//Structure params (here for enable dislay of sprite & hitboxes)
+typedef struct disp_s {
+    int sprite;
+    int hitbox;
+} disp_t;
+
+//Structure hitbox_face
+typedef struct hitbox_face_s {
+    sfVector2f A;
+    sfVector2f B;
+} hitbox_face_t;
+
+//Structure hitbox_cube (all four faces)
+typedef struct hitbox_cube_s {
+    hitbox_face_t AB;
+    hitbox_face_t BD;
+    hitbox_face_t DC;
+    hitbox_face_t CA;
+} hitbox_cube_t;
+
 //Linked List :
 typedef struct linked_list_s {
     sfCircleShape *circle;
@@ -30,17 +50,19 @@ typedef struct plane_list_s {
     struct plane_list_s *next;
     sfRectangleShape *hitbox;
     sfSprite *sprite;
+    sfVector2f top_left_pos;
     sfVector2f departure;
     sfVector2f arrival;
     int speed;
     int delay;
+    int enable;
     sfVector2f pos;
     sfVector2f normalized_vector;
     float angle;
 } plane_list_t;
 void push_to_list_plane(plane_list_t **begin, plane_list_t *temp);
-void display_list_plane(plane_list_t *begin, sfRenderWindow *window);
-void display_node_plane(plane_list_t *node, sfRenderWindow *window);
+void display_list_plane(plane_list_t *begin, sfRenderWindow *window, disp_t disp_param);
+void display_node_plane(plane_list_t *node, sfRenderWindow *window, disp_t disp_param);
 void delete_in_list_plane(plane_list_t **begin, int id);
 void replace_ptr_plane(plane_list_t **temp, plane_list_t **begin);
 
@@ -55,8 +77,8 @@ typedef struct tower_list_s {
     float radius;
 } tower_list_t;
 void push_to_list_tower(tower_list_t **begin, tower_list_t *temp);
-void display_list_tower(tower_list_t *begin, sfRenderWindow *window);
-void display_node_tower(tower_list_t *node, sfRenderWindow *window);
+void display_list_tower(tower_list_t *begin, sfRenderWindow *window, disp_t disp_param);
+void display_node_tower(tower_list_t *node, sfRenderWindow *window, disp_t disp_param);
 void delete_in_list_tower(tower_list_t **begin, int id);
 void replace_ptr_tower(tower_list_t **temp, tower_list_t **begin);
 
@@ -65,11 +87,20 @@ int config_parsing(char *pathname, plane_list_t **begin_plane, tower_list_t **be
 int add_plane(char *config, plane_list_t **begin, sfTexture *texture);
 int add_tower(char *config, tower_list_t **begin, sfTexture *texture);
 sfVector2f norm_vector(sfVector2f pos1, sfVector2f pos2);
+sfVector2f find_top_left(sfVector2f pos, sfVector2f normalized_vector);
 
 //Movement :
 void movement(plane_list_t **begin, sfClock *clock);
 float plane_angle(sfVector2f norm);
 int pause(sfEvent event, int clock_pause);
+void enable_plane(plane_list_t **begin, sfClock *clock);
+void plane_disp_param(sfEvent event, disp_t *param);
+
+//Collision
+int collision_2_faces(hitbox_face_t first, hitbox_face_t second);
+hitbox_cube_t find_4_faces(sfVector2f top_left_pos, sfVector2f normalized_vector);
+int collision_2_cube(hitbox_cube_t first, hitbox_cube_t second);
+int collision_plane_list(plane_list_t **list);
 
 //Word array :
 char **my_str_to_word_array(char *str, char separator);

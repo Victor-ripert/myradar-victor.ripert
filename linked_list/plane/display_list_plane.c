@@ -8,13 +8,15 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-void display_list_plane(plane_list_t *begin, sfRenderWindow *window)
+void display_list_plane(plane_list_t *begin, sfRenderWindow *window, disp_t disp_param)
 {
     plane_list_t *temp;
 
     temp = begin;
     while (temp != NULL) {
-        display_node_plane(temp, window);
+        if (temp->enable == 1 || temp->enable == 2) {
+            display_node_plane(temp, window, disp_param);
+        }
         temp = temp->next;
     }
     //printf("End of Plane's List.\n");
