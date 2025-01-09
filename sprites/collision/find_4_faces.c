@@ -18,6 +18,7 @@ hitbox_face_t find_next_face(hitbox_face_t previous_face)
     new_face.A = previous_face.B;
     new_face.B.x = new_face.A.x + new_vector.x;
     new_face.B.y = new_face.A.y + new_vector.y;
+    return new_face;
 }
 
 hitbox_cube_t find_4_faces(sfVector2f top_left_pos, sfVector2f normalized_vector)

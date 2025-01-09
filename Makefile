@@ -36,8 +36,13 @@ SRC =	main.c	\
 	sprites/plane_disp_param.c	\
 	sprites/collision/collision_plane_list.c	\
 	sprites/collision/find_4_faces.c	\
-	sprites/collision/collision_2_cube.c	\
-	sprites/collision/collision_2_faces.c
+	sprites/collision/collision_2_faces.c	\
+	sprites/collision/intersecting_droite.c	\
+	sprites/collision/cube_to_cube.c	\
+	sprites/collision/projection_vertece.c	\
+	sprites/collision/new/SAT_2_cube.c	\
+	sprites/collision/new/get_4_vertece.c
+#	sprites/collision/collision_2_cube.c	\
 
 NAME	=	my_radar
 

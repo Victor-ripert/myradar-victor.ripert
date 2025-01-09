@@ -18,7 +18,7 @@ void movement(plane_list_t **begin, sfClock *clock)
 
     temp = (*begin);
     while (temp != NULL) {
-        if (elapsed_time.microseconds > 10000 && temp->enable == 1) {
+        if (elapsed_time.microseconds > 10000 && (temp->enable == 1 || temp->enable == 2)) {
             temp->pos.x += ((temp->normalized_vector.x * temp->speed) / 100);
             temp->pos.y += (temp->normalized_vector.y * temp->speed) / 100;
             temp->top_left_pos.x += ((temp->normalized_vector.x * temp->speed) / 100);

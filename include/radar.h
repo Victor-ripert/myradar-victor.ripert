@@ -30,6 +30,20 @@ typedef struct hitbox_cube_s {
     hitbox_face_t CA;
 } hitbox_cube_t;
 
+typedef struct cube_s {
+    sfVector2f *vertece;
+    sfVector2f edge[4];
+    sfVector2f perp1;
+    sfVector2f perp2;
+    sfVector2f perp3;
+    sfVector2f perp4;
+} cube_t;
+
+cube_t cube_to_cube(cube_t hitbox);
+int projection_vertece(cube_t cube1, cube_t cube2, sfVector2f *stack);
+int SAT_2_cube(cube_t first, cube_t second);
+cube_t find_4_vertece(sfRectangleShape *hitbox);
+
 //Linked List :
 typedef struct linked_list_s {
     sfCircleShape *circle;
@@ -101,6 +115,7 @@ int collision_2_faces(hitbox_face_t first, hitbox_face_t second);
 hitbox_cube_t find_4_faces(sfVector2f top_left_pos, sfVector2f normalized_vector);
 int collision_2_cube(hitbox_cube_t first, hitbox_cube_t second);
 int collision_plane_list(plane_list_t **list);
+int intersecting_droite(hitbox_face_t first, hitbox_face_t second);
 
 //Word array :
 char **my_str_to_word_array(char *str, char separator);
