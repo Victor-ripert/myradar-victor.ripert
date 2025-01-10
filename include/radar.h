@@ -151,7 +151,7 @@ typedef struct quadtree_hitbox_s {
     sfRectangleShape *D_ht;
 } quadtree_hitbox_t;
 quadtree_hitbox_t *init_qt_hitbox(void);
-void display_qt_hitbox(sfRenderWindow *window, quadtree_hitbox_t *qt_hitbox);
+void display_qt_hitbox(sfRenderWindow *window, quadtree_hitbox_t *qt_hitbox, disp_t displayed);
 void destroy_qt_hitbox(quadtree_hitbox_t *qt_hitbox);
 void collision_tower(tower_list_t **tower, plane_list_t **plane);
 

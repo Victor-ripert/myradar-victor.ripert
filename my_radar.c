@@ -75,7 +75,7 @@ int my_radar(char **argv)
         //Draw all plane & tower
         display_list_plane(avion, window, disp_param);
         display_list_tower(tower, window, disp_param);
-        display_qt_hitbox(window, qt_hitbox);
+        display_qt_hitbox(window, qt_hitbox, disp_param);
         /* Draw the sprite */
         display(window, sprite);
         /* Update the window */
