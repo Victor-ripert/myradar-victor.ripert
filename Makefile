@@ -41,7 +41,15 @@ SRC =	main.c	\
 	sprites/collision/cube_to_cube.c	\
 	sprites/collision/projection_vertece.c	\
 	sprites/collision/new/SAT_2_cube.c	\
-	sprites/collision/new/get_4_vertece.c
+	sprites/collision/new/get_4_vertece.c	\
+	sprites/collision/quadtree/quadtree.c	\
+	sprites/collision/quadtree/push_list_quadtree.c	\
+	sprites/collision/quadtree/free_quadtree.c	\
+	sprites/collision/quadtree/display_quadtree_list.c	\
+	sprites/collision/quadtree/init_qt_hitbox.c	\
+	sprites/collision/quadtree/display_qt_hitbox.c	\
+	sprites/collision/quadtree/destroy_qt_hitbox.c	\
+	sprites/collision/collision_tower.c
 #	sprites/collision/collision_2_cube.c	\
 
 NAME	=	my_radar

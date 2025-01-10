@@ -27,6 +27,7 @@ int my_radar(char **argv)
     sfClock *delay_clock = sfClock_create();
     int clock_pause = 0;
     disp_t disp_param;
+    quadtree_hitbox_t *qt_hitbox = init_qt_hitbox();
 
     plane_list_t *avion = malloc(sizeof(plane_list_t));
     tower_list_t *tower = malloc(sizeof(tower_list_t));
@@ -62,7 +63,9 @@ int my_radar(char **argv)
             }
         }
         //Collision entre avions
-        collision_plane_list(&avion);
+        // collision_plane_list(&avion);
+        collision_tower(&tower, &avion);
+        quadtree(&avion);
         /* Clear the screen */
         enable_plane(&avion, delay_clock);
         if (clock_pause == 0) {
@@ -72,12 +75,14 @@ int my_radar(char **argv)
         //Draw all plane & tower
         display_list_plane(avion, window, disp_param);
         display_list_tower(tower, window, disp_param);
+        display_qt_hitbox(window, qt_hitbox);
         /* Draw the sprite */
         display(window, sprite);
         /* Update the window */
         sfRenderWindow_display(window);
     }
     /* Cleanup resources */
+    destroy_qt_hitbox(qt_hitbox);
     sfSprite_destroy(sprite);
     sfTexture_destroy(texture);
     sfRenderWindow_destroy(window);

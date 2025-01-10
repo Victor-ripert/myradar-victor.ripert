@@ -27,16 +27,11 @@ sfVector2f *stack_perp(cube_t cube1, cube_t cube2, sfVector2f *stack)
 int SAT_2_cube(cube_t first, cube_t second)
 {
 
-    printf("SAT 2 CUBE\n");
     cube_t cube1 = cube_to_cube(first);
-    printf("Après cube to cube1\n");
     cube_t cube2 = cube_to_cube(second);
-    printf("Après cube to cube1\n");
     sfVector2f *stack = malloc(sizeof(sfVector2f) * 8);
-    printf("Après stack\n");
     stack_perp(cube1, cube1, stack);
     if (projection_vertece(cube1, cube2, stack) == 1) {
-        printf("Se touche\n");
         free(stack);
         return 1;
     }

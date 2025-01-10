@@ -25,15 +25,15 @@ int projection_vertece(cube_t cube1, cube_t cube2, sfVector2f *stack)
     float bmin;
     float dot;
 
-    printf("cube1 :\n");
-    printf("\t(%f, %f) == (%f, %f) ?\n", cube1.perp1.x, cube1.perp1.y, cube1.edge[0].x, cube1.edge[0].y);
-    printf("\t(%f, %f) == (%f, %f) ?\n", cube1.perp2.x, cube1.perp2.y, cube1.edge[1].x, cube1.edge[1].y);
-    printf("\t(%f, %f) == (%f, %f) ?\n", cube1.perp3.x, cube1.perp3.y, cube1.edge[2].x, cube1.edge[2].y);
-    printf("\t(%f, %f) == (%f, %f) ?\n", cube1.perp4.x, cube1.perp4.y, cube1.edge[3].x, cube1.edge[3].y);
-    printf("\t(%f, %f)\n", cube1.vertece[0].x, cube1.vertece[0].y);
-    printf("\t(%f, %f)?\n", cube1.vertece[1].x, cube1.vertece[1].y);
-    printf("\t(%f, %f)?\n", cube1.vertece[2].x, cube1.vertece[2].y);
-    printf("\t(%f, %f)?\n", cube1.vertece[3].x, cube1.vertece[3].y);
+    // printf("cube1 :\n");
+    // printf("\t(%f, %f) == (%f, %f) ?\n", cube1.perp1.x, cube1.perp1.y, cube1.edge[0].x, cube1.edge[0].y);
+    // printf("\t(%f, %f) == (%f, %f) ?\n", cube1.perp2.x, cube1.perp2.y, cube1.edge[1].x, cube1.edge[1].y);
+    // printf("\t(%f, %f) == (%f, %f) ?\n", cube1.perp3.x, cube1.perp3.y, cube1.edge[2].x, cube1.edge[2].y);
+    // printf("\t(%f, %f) == (%f, %f) ?\n", cube1.perp4.x, cube1.perp4.y, cube1.edge[3].x, cube1.edge[3].y);
+    // printf("\t(%f, %f)\n", cube1.vertece[0].x, cube1.vertece[0].y);
+    // printf("\t(%f, %f)?\n", cube1.vertece[1].x, cube1.vertece[1].y);
+    // printf("\t(%f, %f)?\n", cube1.vertece[2].x, cube1.vertece[2].y);
+    // printf("\t(%f, %f)?\n", cube1.vertece[3].x, cube1.vertece[3].y);
 
     //Boucle Vertice
     for(int i = 0; i < 8; i++) {
@@ -67,8 +67,8 @@ int projection_vertece(cube_t cube1, cube_t cube2, sfVector2f *stack)
         }
         //printf("%d < %d && %d > %d || %d < %d && %d > %d\n", amin, bmax, amin, bmin, bmin, amax, bmin, amin);
         if ((amin < bmax && amin > bmin) || (bmin < amax && bmin > amin)) {
-            printf("V : %f < %f && %f > %f || %f < %f && %f > %f\n", amin, bmax, amin, bmin, bmin, amax, bmin, amin);
-            printf("Le carrer est superposer !!\n");
+            // printf("V : %f < %f && %f > %f || %f < %f && %f > %f\n", amin, bmax, amin, bmin, bmin, amax, bmin, amin);
+            // printf("Le carrer est superposer !!\n");
         } else {
             // printf("F : %d < %d && %d > %d || %d < %d && %d > %d\n", amin, bmax, amin, bmin, bmin, amax, bmin, amin);
             // printf("Carré pas superposé !!\n");
@@ -78,6 +78,6 @@ int projection_vertece(cube_t cube1, cube_t cube2, sfVector2f *stack)
     }
         display_vertex(cube1);
         display_vertex(cube2);
-    printf("Collision !!\n");
+    // printf("Collision !!\n");
     return 1;
 }

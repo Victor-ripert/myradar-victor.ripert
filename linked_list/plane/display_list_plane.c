@@ -14,10 +14,9 @@ void display_list_plane(plane_list_t *begin, sfRenderWindow *window, disp_t disp
 
     temp = begin;
     while (temp != NULL) {
-        if (temp->enable == 1 || temp->enable == 2) {
+        if (temp->enable == 1) {
             display_node_plane(temp, window, disp_param);
         }
         temp = temp->next;
     }
-    //printf("End of Plane's List.\n");
 }

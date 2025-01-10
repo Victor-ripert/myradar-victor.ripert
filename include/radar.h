@@ -10,6 +10,7 @@
 #ifndef FILE_H
     #define FILE_H
 
+
 //Structure params (here for enable dislay of sprite & hitboxes)
 typedef struct disp_s {
     int sprite;
@@ -38,11 +39,6 @@ typedef struct cube_s {
     sfVector2f perp3;
     sfVector2f perp4;
 } cube_t;
-
-cube_t cube_to_cube(cube_t hitbox);
-int projection_vertece(cube_t cube1, cube_t cube2, sfVector2f *stack);
-int SAT_2_cube(cube_t first, cube_t second);
-cube_t find_4_vertece(sfRectangleShape *hitbox);
 
 //Linked List :
 typedef struct linked_list_s {
@@ -73,12 +69,20 @@ typedef struct plane_list_s {
     sfVector2f pos;
     sfVector2f normalized_vector;
     float angle;
+    int in_tower_radius;
 } plane_list_t;
 void push_to_list_plane(plane_list_t **begin, plane_list_t *temp);
 void display_list_plane(plane_list_t *begin, sfRenderWindow *window, disp_t disp_param);
 void display_node_plane(plane_list_t *node, sfRenderWindow *window, disp_t disp_param);
 void delete_in_list_plane(plane_list_t **begin, int id);
 void replace_ptr_plane(plane_list_t **temp, plane_list_t **begin);
+
+//Structure Quadtree
+typedef struct quadtree_s {
+    plane_list_t *plane;
+    struct quadtree_s *previous;
+    struct quadtree_s *next;
+} quadtree_t;
 
 //Tower :
 typedef struct tower_list_s {
@@ -114,7 +118,7 @@ void plane_disp_param(sfEvent event, disp_t *param);
 int collision_2_faces(hitbox_face_t first, hitbox_face_t second);
 hitbox_cube_t find_4_faces(sfVector2f top_left_pos, sfVector2f normalized_vector);
 int collision_2_cube(hitbox_cube_t first, hitbox_cube_t second);
-int collision_plane_list(plane_list_t **list);
+int collision_plane_list(quadtree_t **list);
 int intersecting_droite(hitbox_face_t first, hitbox_face_t second);
 
 //Word array :
@@ -127,4 +131,28 @@ int my_radar(char **argv);
 void display(sfRenderWindow *window, sfSprite *sprite);
 sfCircleShape *create_circle(sfVector2f position, float radius);
 int is_intersecting_circle(sfCircleShape *c1, sfCircleShape *c2);
+
+//Colision Vrai :
+cube_t cube_to_cube(cube_t hitbox);
+int projection_vertece(cube_t cube1, cube_t cube2, sfVector2f *stack);
+int SAT_2_cube(cube_t first, cube_t second);
+cube_t find_4_vertece(sfRectangleShape *hitbox);
+
+//Quadtree
+int quadtree(plane_list_t **list);
+void push_list_quadtree(quadtree_t **begin, plane_list_t *plane);
+void free_quadtree(quadtree_t **list);
+void display_quadtree_list(quadtree_t **list);
+
+typedef struct quadtree_hitbox_s {
+    sfRectangleShape *A_ht;
+    sfRectangleShape *B_ht;
+    sfRectangleShape *C_ht;
+    sfRectangleShape *D_ht;
+} quadtree_hitbox_t;
+quadtree_hitbox_t *init_qt_hitbox(void);
+void display_qt_hitbox(sfRenderWindow *window, quadtree_hitbox_t *qt_hitbox);
+void destroy_qt_hitbox(quadtree_hitbox_t *qt_hitbox);
+void collision_tower(tower_list_t **tower, plane_list_t **plane);
+
 #endif /* FILE_H */

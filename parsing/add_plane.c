@@ -47,6 +47,7 @@ int add_plane(char *config, plane_list_t **begin, sfTexture *texture)
     temp->speed = str_to_nbr(config_array[5]);
     temp->delay = str_to_nbr(config_array[6]);
     temp->enable = 0;
+    temp->in_tower_radius = 0;
     temp->pos = temp->departure;
     temp->sprite = plane;
     temp->hitbox = hitbox;
